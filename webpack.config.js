@@ -16,19 +16,35 @@ const commonConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({ title: 'Webpack demo'}),
-  ]
+  ],
 };
 
 const productionConfig = () => commonConfig;
 
 const developmentConfig = () => {
   const config = {
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          enforce: 'pre',
+          loader: 'eslint-loader',
+          options: {
+            emitWarning: true,
+          },
+        },
+      ],
+    },
     devServer: {
       open: true,
       historyApiFallback: true,
       stats: 'errors-only',
       host: '0.0.0.0',
       port: process.env.PORT,
+      overlay: {
+        errors: true,
+        warnings: true,
+      }
     },
   };
 
@@ -44,4 +60,4 @@ module.exports = (env) => {
     return productionConfig();
   }
   return developmentConfig();
-}
+};
