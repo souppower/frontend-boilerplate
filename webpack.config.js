@@ -47,6 +47,7 @@ const developmentConfig = () => {
     devServer: {
       open: true,
       historyApiFallback: true,
+      contentBase: './build',
       stats: 'errors-only',
       host: '0.0.0.0',
       port: process.env.PORT,
