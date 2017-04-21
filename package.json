@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --env production",
-    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env development\"",
+    "start": "webpack-dev-server --env development",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint:js": "eslint app/ webpack.*.js --cache --fix"
+    "lint:js": "eslint app/ webpack.*.js --cache --fix --ignore-pattern .gitignore"
   },
   "keywords": [],
   "author": "",

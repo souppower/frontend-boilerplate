@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATHS = {
@@ -15,7 +16,7 @@ const commonConfig = {
     filename: '[name].js',
   },
   plugins: [
-    new HtmlWebpackPlugin({ title: 'Webpack demo'}),
+    new HtmlWebpackPlugin({ title: 'Webpack demo' }),
   ],
 };
 
@@ -35,6 +36,14 @@ const developmentConfig = () => {
         },
       ],
     },
+    plugins: [
+      new webpack.LoaderOptionsPlugin({
+        eslint: {
+          failOnWarning: false,
+          failOnError: true,
+        },
+      }),
+    ],
     devServer: {
       open: true,
       historyApiFallback: true,
@@ -44,7 +53,7 @@ const developmentConfig = () => {
       overlay: {
         errors: true,
         warnings: true,
-      }
+      },
     },
   };
 
