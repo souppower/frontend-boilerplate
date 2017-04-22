@@ -1,73 +1,43 @@
 const path = require('path');
-const webpack = require('webpack');
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const parts = require('./webpack.parts');
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
 };
 
-const commonConfig = {
-  entry: {
-    app: PATHS.app,
-  },
-  output: {
-    path: PATHS.build,
-    filename: '[name].js',
-  },
-  plugins: [
-    new HtmlWebpackPlugin({ title: 'Webpack demo' }),
-  ],
-};
-
-const productionConfig = () => commonConfig;
-
-const developmentConfig = () => {
-  const config = {
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          enforce: 'pre',
-          loader: 'eslint-loader',
-          options: {
-            emitWarning: true,
-          },
-        },
-      ],
+const commonConfig = merge([
+  {
+    entry: {
+      app: PATHS.app,
+    },
+    output: {
+      path: PATHS.build,
+      filename: '[name].js',
     },
     plugins: [
-      new webpack.LoaderOptionsPlugin({
-        eslint: {
-          failOnWarning: false,
-          failOnError: true,
-        },
-      }),
+      new HtmlWebpackPlugin({ title: 'Webpack demo' }),
     ],
-    devServer: {
-      open: true,
-      historyApiFallback: true,
-      contentBase: './build',
-      stats: 'errors-only',
-      host: '0.0.0.0',
-      port: process.env.PORT,
-      overlay: {
-        errors: true,
-        warnings: true,
-      },
-    },
-  };
+  },
+  parts.lintJavaScript({ include: PATHS.app }),
+]);
 
-  return Object.assign(
-    {},
-    commonConfig,
-    config
-  );
-};
+const productionConfig = () => merge([]);
+
+const developmentConfig = merge([
+  parts.devServer({
+    host: '0.0.0.0',
+    port: process.env.PORT,
+    contentBase: PATHS.build,
+  }),
+]);
 
 module.exports = (env) => {
   if (env === 'production') {
-    return productionConfig();
+    return merge(commonConfig, productionConfig);
   }
-  return developmentConfig();
+  return merge(commonConfig, developmentConfig);
 };
