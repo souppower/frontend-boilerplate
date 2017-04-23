@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const PurifyCSSPlugin = require('purifycss-webpack');
 
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
@@ -76,5 +77,64 @@ exports.autoprefix = () => ({
     plugins: () => ([
       require('autoprefixer'),
     ]),
+  },
+});
+
+exports.purifyCSS = ({ paths }) => ({
+  plugins: [
+    new PurifyCSSPlugin({ paths }),
+  ],
+});
+
+exports.lintCSS = ({ include, exclude }) => ({
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        include,
+        exclude,
+        enforce: 'pre',
+        loader: 'postcss-loader',
+        options: {
+          plugins: () => ([
+            require('stylelint')({
+              ignoreFiles: 'node_modules/**/*.css',
+            }),
+          ]),
+        },
+      },
+    ],
+  },
+});
+
+exports.loadImages = ({ include, exclude, options } = {}) => ({
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|svg)$/,
+        include,
+        exclude,
+        use: {
+          loader: 'url-loader',
+          options,
+        },
+      },
+    ],
+  },
+});
+
+exports.loadFonts = ({ include, exclude, options } = {}) => ({
+  module: {
+    rules: [
+      {
+        test: /\.(eot|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+        include,
+        exclude,
+        use: {
+          loader: 'file-loader',
+          options,
+        },
+      },
+    ],
   },
 });

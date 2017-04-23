@@ -23,11 +23,25 @@ const commonConfig = merge([
     ],
   },
   parts.lintJavaScript({ include: PATHS.app }),
+  parts.lintCSS({ include: PATHS.app }),
+  parts.loadFonts({
+    options: {
+      name: '[name].[ext]',
+    },
+  }),
 ]);
 
 const productionConfig = merge([
   parts.extractCSS({
     use: ['css-loader', parts.autoprefix()],
+  parts.purifyCSS({
+    paths: glob.sync(`${PATHS.app}/**/*.css`, { nodir: true }),
+  }),
+  parts.loadImages({
+    options: {
+      limit: 15000,
+      name: '[name].[ext]',
+    },
   }),
 ]);
 
@@ -38,6 +52,7 @@ const developmentConfig = merge([
     contentBase: PATHS.build,
   }),
   parts.loadCSS(),
+  parts.loadImages(),
 ]);
 
 module.exports = (env) => {
