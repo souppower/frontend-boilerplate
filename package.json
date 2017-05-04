@@ -6,10 +6,10 @@
   "scripts": {
     "build": "rm -rf dist && webpack --env production",
     "start": "webpack-dev-server --env development",
-    "stylelint": "stylelint src/**/*.scss",
     "test": "tsc && ava",
     "test:coverage": "nyc ava",
     "test:watch": "ava --watch",
+    "lint:sass": "stylelint src/**/*.scss",
     "lint:ts": "tslint src/**/*.ts --fix"
   },
   "ava": {
