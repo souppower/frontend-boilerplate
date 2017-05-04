@@ -28,7 +28,6 @@ const commonConfig = merge([
 		},
 	},
 	parts.transpileTypeScript(),
-	parts.lintCSS({ include: PATHS.main }),
 	parts.loadFonts({
 		options: {
 			name: '[name].[ext]',

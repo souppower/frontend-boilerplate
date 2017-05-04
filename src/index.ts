@@ -1,8 +1,7 @@
-import 'purecss'
-import 'font-awesome/css/font-awesome.css'
-import './styles/main.scss'
+import "font-awesome/css/font-awesome.css";
+import "purecss";
+import "./styles/main.scss";
 
-import component from './component'
+import component from "./component";
 
-document.body.appendChild(component())
-
+document.body.appendChild(component());
