@@ -21,7 +21,7 @@ const commonConfig = merge([
 			filename: '[name].js',
 		},
 		plugins: [
-			new HtmlWebpackPlugin({ title: 'Webpack demo' }),
+			new HtmlWebpackPlugin({ title: 'Frontend Boilerplate' }),
 		],
 		resolve: {
 			extensions: ['.ts', '.js']
