@@ -60,21 +60,20 @@ exports.transpileTypeScript = () => ({
 	},
 })
 
-exports.loadCSS = ({ include, exclude } = {}) => ({
+exports.loadSass = ({ include, exclude } = {}) => ({
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
+				test: /\.s?css$/,
 				include,
 				exclude,
-				use: ['style-loader', 'css-loader'],
+				use: ['style-loader', 'css-loader', 'sass-loader'],
 			},
 		],
 	},
 })
 
 exports.extractCSS = ({ include, exclude, use }) => {
-  // Output extracted CSS to a file
 	const plugin = new ExtractTextPlugin({
 		filename: '[name].css',
 	})
@@ -89,7 +88,7 @@ exports.extractCSS = ({ include, exclude, use }) => {
 
 					loader: plugin.extract({
 						use,
-            // fallback: 'style-loader',
+						fallback: 'style-loader',
 					}),
 				},
 			],
@@ -117,7 +116,7 @@ exports.lintCSS = ({ include, exclude }) => ({
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
+				test: /\.scss$/,
 				include,
 				exclude,
 				enforce: 'pre',

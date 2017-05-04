@@ -59,7 +59,7 @@ const developmentConfig = merge([
 		port: process.env.PORT,
 		contentBase: PATHS.build,
 	}),
-	parts.loadCSS(),
+	parts.loadSass(),
 	parts.loadImages(),
 	{
 		output: {
