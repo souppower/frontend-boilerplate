@@ -16,16 +16,13 @@ exports.devServer = ({ host, port } = {}) => ({
 	},
 })
 
-
-exports.lintJavaScript = ({ include, exclude, options }) => ({
+exports.lintTypeScript = ({ options }) => ({
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
-				include,
-				exclude,
+				test: /\.ts$/,
 				enforce: 'pre',
-				loader: 'eslint-loader',
+				loader: 'tslint-loader',
 				options,
 			},
 		],
