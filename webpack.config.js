@@ -7,17 +7,17 @@ const glob = require('glob')
 const parts = require('./webpack.parts')
 
 const PATHS = {
-	app: path.join(__dirname, 'app'),
-	build: path.join(__dirname, 'build'),
+	main: path.join(__dirname, 'src'),
+	dist: path.join(__dirname, 'dist'),
 }
 
 const commonConfig = merge([
 	{
 		entry: {
-			app: PATHS.app,
+			main: PATHS.main,
 		},
 		output: {
-			path: PATHS.build,
+			path: PATHS.dist,
 			filename: '[name].js',
 		},
 		plugins: [
@@ -27,9 +27,9 @@ const commonConfig = merge([
 			extensions: ['.ts', '.js']
 		},
 	},
-	parts.lintJavaScript({ include: PATHS.app }),
+	parts.lintJavaScript({ include: PATHS.main }),
 	parts.transpileTypeScript(),
-	parts.lintCSS({ include: PATHS.app }),
+	parts.lintCSS({ include: PATHS.main }),
 	parts.loadFonts({
 		options: {
 			name: '[name].[ext]',
@@ -42,7 +42,7 @@ const productionConfig = merge([
 		use: ['css-loader', parts.autoprefix(), 'sass-loader'],
 	}),
 	parts.purifyCSS({
-		paths: glob.sync(`${PATHS.app}/**/*`, { nodir: true }),
+		paths: glob.sync(`${PATHS.main}/**/*`, { nodir: true }),
 	}),
 	parts.loadImages({
 		options: {
@@ -57,7 +57,7 @@ const developmentConfig = merge([
 	parts.devServer({
 		host: '0.0.0.0',
 		port: process.env.PORT,
-		contentBase: PATHS.build,
+		contentBase: PATHS.dist,
 	}),
 	parts.loadSass(),
 	parts.loadImages(),

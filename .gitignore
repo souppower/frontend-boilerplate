@@ -61,6 +61,6 @@ typings/
 
 
 
-build/
-app/**/*.js
+dist/
+src/**/*.js
 test/**/*.js

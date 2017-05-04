@@ -4,13 +4,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf build && webpack --env production",
+    "build": "rm -rf dist && webpack --env production",
     "start": "webpack-dev-server --env development",
-    "stylelint": "stylelint app/**/*.scss",
+    "stylelint": "stylelint src/**/*.scss",
     "test": "tsc && ava",
     "test:coverage": "nyc ava",
     "test:watch": "ava --watch",
-    "lint:js": "eslint app/ webpack.*.js --cache --fix --ignore-pattern .gitignore"
+    "lint:js": "eslint src/ webpack.*.js --cache --fix --ignore-pattern .gitignore"
   },
   "ava": {
     "failFast": true,
