@@ -39,10 +39,10 @@ const commonConfig = merge([
 
 const productionConfig = merge([
 	parts.extractCSS({
-		use: ['css-loader', parts.autoprefix()],
+		use: ['css-loader', parts.autoprefix(), 'sass-loader'],
 	}),
 	parts.purifyCSS({
-		paths: glob.sync(`${PATHS.app}/**/*.css`, { nodir: true }),
+		paths: glob.sync(`${PATHS.app}/**/*`, { nodir: true }),
 	}),
 	parts.loadImages({
 		options: {
