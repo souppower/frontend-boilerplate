@@ -27,7 +27,6 @@ const commonConfig = merge([
 			extensions: ['.ts', '.js']
 		},
 	},
-	parts.lintJavaScript({ include: PATHS.main }),
 	parts.transpileTypeScript(),
 	parts.lintCSS({ include: PATHS.main }),
 	parts.loadFonts({

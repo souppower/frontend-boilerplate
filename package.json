@@ -10,7 +10,6 @@
     "test": "tsc && ava",
     "test:coverage": "nyc ava",
     "test:watch": "ava --watch",
-    "lint:js": "eslint src/ webpack.*.js --cache --fix --ignore-pattern .gitignore"
   },
   "ava": {
     "failFast": true,
@@ -25,13 +24,6 @@
     "ava": "^0.19.1",
     "awesome-typescript-loader": "^3.1.3",
     "css-loader": "^0.28.0",
-    "eslint": "^3.19.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^4.2.2",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
     "extract-loader": "^0.1.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
