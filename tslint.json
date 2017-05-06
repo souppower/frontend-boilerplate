@@ -8,7 +8,15 @@
         "quotemark": [
             "single"
         ],
-        "arrow-parens": [true, "ban-single-arg-parens"]
+        "arrow-parens": [true, "ban-single-arg-parens"],
+        "no-console": [
+            true,
+            "debug",
+            "info",
+            "time",
+            "timeEnd",
+            "trace"
+        ]
     },
     "rulesDirectory": []
 }
